@@ -1,81 +1,65 @@
 import 'package:flutter/material.dart';
 
-class dzikir_pagi extends StatelessWidget {
+class dzikir_pagi extends StatefulWidget {
+  @override
+  _DzikirPagiState createState() => _DzikirPagiState();
+}
+
+class _DzikirPagiState extends State<dzikir_pagi> {
+  int counter = 0; // Variabel untuk menyimpan angka dzikir
+  final int limit = 3; // Batasan hitungan tasbih
+
+  void incrementCounter() {
+    if (counter < limit) {
+      setState(() {
+        counter++;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Dzikir Pagi'),
       ),
-      drawer: Drawer(
-        child: Container(
-          color: const Color.fromRGBO(124, 92, 60, 1),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: Image.asset(
-                  'assets/images/Dzikrullah putih.png',
-                  width: 300,
-                  height: 80,
-                  fit: BoxFit.contain,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Judul', // Ganti dengan judul yang sesuai
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-              ),
-              ListTile(
-                leading: Image.asset(
-                  'assets/images/icon_pagi.png', // Ganti dengan path gambar ikon Anda
-                  width: 30, // Atur lebar gambar ikon
-                  height: 30, // Atur tinggi gambar ikon
+                ElevatedButton(
+                  onPressed: () {
+                    incrementCounter(); // Memanggil fungsi untuk menambah angka dzikir
+                  },
+                  child:
+                      Text('$counter'), // Menampilkan angka dzikir pada tombol
                 ),
-                title: Text(
-                  'Dzikir Pagi',
-                  style: TextStyle(
-                      color: Colors.white), // Mengubah warna teks menjadi putih
-                ),
-                // Teks di sebelah ikon
-                onTap: () {
-                  Navigator.popUntil(context, ModalRoute.withName('/'));
-                },
-              ),
-              ListTile(
-                leading: Image.asset(
-                  'assets/images/icon_petang.png', // Ganti dengan path gambar ikon Anda
-                  width: 30, // Atur lebar gambar ikon
-                  height: 30, // Atur tinggi gambar ikon
-                ),
-                title: Text(
-                  'Dzikir Petang',
-                  style: TextStyle(
-                      color: Colors.white), // Mengubah warna teks menjadi putih
-                ),
-                // Teks di sebelah ikon
-                onTap: () {
-                  Navigator.popUntil(context, ModalRoute.withName('/'));
-                },
-              ),
-              ListTile(
-                leading: Image.asset(
-                  'assets/images/icon_tasbih.png', // Ganti dengan path gambar ikon Anda
-                  width: 30, // Atur lebar gambar ikon
-                  height: 30, // Atur tinggi gambar ikon
-                ),
-                title: Text(
-                  'Tasbih Digital',
-                  style: TextStyle(
-                      color: Colors.white), // Mengubah warna teks menjadi putih
-                ),
-                // Teks di sebelah ikon
-                onTap: () {
-                  Navigator.popUntil(context, ModalRoute.withName('/'));
-                },
-              ),
-              // Menu lainnya...
-            ],
-          ),
+              ],
+            ),
+            SizedBox(height: 20), // Jarak antara judul dan teks dzikir
+            // Teks dzikir dalam bahasa Arab
+            Text(
+              'اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ وَمَلَائِكَتِكَ وَجَمِيعَ خَلْقِكَ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ',
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 10), // Jarak antara teks dzikir dan artinya
+            // Teks arti dzikir
+            Text(
+              'Arti dzikir dalam bahasa Indonesia',
+              style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
-      ),
-      body: Center(
-        child: Text('Dzikir Pagi Page'),
       ),
     );
   }
